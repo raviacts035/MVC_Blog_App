@@ -1,9 +1,14 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+
 const config={
-    PORT:5000,
-    mongodb_URL:'mongodb://0.0.0.0/blogapp',
-    JWT_secret:'Ravi123',
-    JWT_Expiry:'1d',
-    Test_mongodb_URL:'mongodb://0.0.0.0/test_blogapp'
+    PORT: process.env.PORT,
+    mongodb_URL:process.env.mongodb_URL,
+    JWT_secret:process.env.JWT_secret,
+    JWT_Expiry:process.env.JWT_Expiry,
+    Test_mongodb_URL:process.env.Test_mongodb_URL
     
 }
 

@@ -9,7 +9,7 @@ const server: http.Server=http.createServer(app);
 
 // Connecting DB and Starting server
 try{
-    mongoose.connect(config.mongodb_URL)
+    mongoose.connect(config.mongodb_URL!)
     console.log('DataBase Connected!!')
 
     server.listen(config.PORT,():void=>{

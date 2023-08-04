@@ -40,7 +40,7 @@ userSchema.methods={
         return await bcrypt.compare(plainPass, this.password);
     },
     getJwtToken:function(){
-        return JWT.sign({_id:this._id},config.JWT_secret,{expiresIn:config.JWT_Expiry})
+        return JWT.sign({_id:this._id},config.JWT_secret!,{expiresIn:config.JWT_Expiry!})
     }
 }
 

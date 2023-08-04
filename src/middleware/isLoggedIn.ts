@@ -2,7 +2,7 @@ import User from '../models/userSchema';
 import CustomRequest from '../types/CustomRequest';
 import JWT, {JwtPayload} from 'jsonwebtoken';
 import asyncHandler from "../helpers/asyncHandler";
-import express, {Response, NextFunction} from 'express';
+import {Response, NextFunction} from 'express';
 import CustomError from "../helpers/CustomError";
 import config from "../config";
 
@@ -30,7 +30,7 @@ export const isLoggedIn=asyncHandler(async (req:CustomRequest,_res:Response,next
         //     throw new CustomError("Token expired",401);
         //   }
         
-    const {_id:userId}=JWT.verify(token,config.JWT_secret) as jwt_token;
+    const {_id:userId}=JWT.verify(token,config.JWT_secret!) as jwt_token;
 
     if (!userId) throw new CustomError("User not authenticated",401);
         
