@@ -14,7 +14,7 @@ interface jwt_token extends JwtPayload{
 }
 
 export const isLoggedIn=asyncHandler(async (req:CustomRequest,_res:Response,next:NextFunction)=>{
-    var token:string='';
+    var token:string|any='';
 
     if (req.headers?.authorization && req.headers?.authorization?.startsWith("Bearer")){
         token=req.headers.authorization.split(" ")[1]
@@ -25,10 +25,10 @@ export const isLoggedIn=asyncHandler(async (req:CustomRequest,_res:Response,next
         throw new CustomError("User not authenticated",401);
     }
     
-    // const {exp}=JWT.decode()
-    // if (Date.now() >= exp * 1000) {
-        //     throw new CustomError("Token expired",401);
-        //   }
+    const decodedToken:any  =JWT.decode(token);
+    if (decodedToken?.exp && (Date.now() >= decodedToken?.exp * 1000)) {
+        throw new CustomError("JWT Token expired",401);
+    }
         
     const {_id:userId}=JWT.verify(token,config.JWT_secret!) as jwt_token;
 
